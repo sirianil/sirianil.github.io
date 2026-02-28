@@ -3,10 +3,552 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
+  <title>Siri Anil — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --ink: #1a1a18;
+      --ink-light: #6b6b62;
+      --accent: #c8a96e;
+      --border: #e5e2db;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(249,247,244,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-light);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5vw;
+      padding-top: 80px;
+    }
+
+    .hero-inner {
+      max-width: 780px;
+    }
+
+    .hero-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--ink-light);
+    }
+
+    .hero-bio {
+      font-size: 1.1rem;
+      color: var(--ink-light);
+      max-width: 520px;
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-bottom: 1.5px solid var(--accent);
+      padding-bottom: 2px;
+      transition: gap 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.55s forwards;
+    }
+
+    .hero-cta:hover { gap: 1rem; }
+    .hero-cta::after { content: '→'; }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 7rem 5vw;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p + p { margin-top: 1.2rem; }
+
+    .about-text p {
+      color: var(--ink-light);
+    }
+
+    .about-aside {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+    }
+
+    .about-aside h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--ink-light);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+
+    .project-number {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-group h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .skill-group ul {
+      list-style: none;
+    }
+
+    .skill-group li {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-group li:last-child { border-bottom: none; }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-text p {
+      color: var(--ink-light);
+      margin-bottom: 2rem;
+    }
+
+    .contact-email {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+      transition: opacity 0.2s;
+    }
+
+    .contact-email:hover { opacity: 0.7; }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--white);
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .social-link:hover {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+
+    .social-link span { opacity: 0.4; font-size: 0.8rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--ink-light);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, I'm [Your Name]</h1>
-  <p>Welcome to my personal website!</p>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Siri Anil</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-label">Available for opportunities</p>
+      <h1>Hi, I'm <em>Siri Anil</em> —<br>a Software Developer based in California.</h1>
+      <p class="hero-bio">I love collaborating with fellow devs to build software with a focus on performance, reliability and quality.</p>
+      <a href="#work" class="hero-cta">See my work</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label reveal">About</p>
+      <h2 class="section-title reveal">A little about me.</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>I building products by writing code </p>
+          <p>A second paragraph is a great place to mention where you've worked, what you've studied, or any experiences that shaped how you think and work.</p>
+          <p>Feel free to add a third paragraph with something personal — hobbies, interests, what you're currently learning or reading.</p>
+        </div>
+        <div class="about-aside reveal">
+          <h3>Quick facts</h3>
+          <div class="tag-list">
+            <span class="tag">📍 Your City</span>
+            <span class="tag">💼 Your Role</span>
+            <span class="tag">🎓 Your Degree</span>
+            <span class="tag">🌐 Open to remote</span>
+            <span class="tag">☕ Coffee drinker</span>
+            <span class="tag">📚 Lifelong learner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-inner">
+      <p class="section-label reveal">Work</p>
+      <h2 class="section-title reveal">My Work.</h2>
+      <div class="projects-grid">
+
+        <a href="#" class="project-card reveal">
+          <p class="project-number">Project 01</p>
+          <h3>Square Web Payments SDK</h3>
+          <p>The Web Payments SDK is a JavaScript browser-client SDK that provides a secure payment-card entry method. I primarily worked on Typescript and Golang</p>
+          <span class="https://developer.squareup.com/docs/web-payments/overview">View project →</span>
+        </a>
+
+        <a href="#" class="project-card reveal">
+          <p class="project-number">Project 02</p>
+          <h3>Project Title Two</h3>
+          <p>A short description of what this project is, what problem it solves, and what technologies or methods you used.</p>
+          <span class="project-link">View project →</span>
+        </a>
+
+        <a href="#" class="project-card reveal">
+          <p class="project-number">Project 03</p>
+          <h3>Project Title Three</h3>
+          <p>A short description of what this project is, what problem it solves, and what technologies or methods you used.</p>
+          <span class="project-link">View project →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <p class="section-label reveal">Skills</p>
+      <h2 class="section-title reveal">What I work with.</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group reveal">
+          <h3>Languages</h3>
+          <ul>
+            <li>Typescript</li>
+            <li>Golang</li>
+            <li>Python</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3>Frameworks</h3>
+          <ul>
+            <li>React</li>
+            <li>Node.js</li>
+            <li>Express</li>
+            <li>Tailwind CSS</li>
+          </ul>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3>Tools</h3>
+          <ul>
+            <li>Datadog/Sentry</li>
+            <li>Snowflake</li>
+            <li>Figma</li>
+            <li>Docker/Kubernetes</li>
+          </ul>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3>AI</h3>
+          <ul>
+            <li>Multi Agent Orchestration</li>
+            <li>Git worktrees</li>
+            <li>MCPs</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label reveal">Contact</p>
+      <h2 class="section-title reveal">Let's work together.</h2>
+      <div class="contact-inner">
+        <div class="contact-text reveal">
+          <p>I'm always open to interesting projects, collaborations, or just a good conversation. Drop me a line — I try to reply to everything.</p>
+          <a href="mailto:siri.rao13@gmail.com" class="contact-email">you@email.com</a>
+        </div>
+        <div class="social-links reveal">
+          <a href="https://github.com/sirianil" target="_blank" class="social-link">
+            GitHub <span>↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/siri-anil-244326a1/" target="_blank" class="social-link">
+            LinkedIn <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Siri Anil</span>
+    <span>Built with care</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
