@@ -79,7 +79,29 @@
     }
 
     .hero-inner {
-      max-width: 780px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .hero-photo-wrap {
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.6s forwards;
+      flex-shrink: 0;
+    }
+
+    .hero-photo {
+      width: 280px;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      filter: grayscale(15%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
     }
 
     .hero-label {
@@ -95,7 +117,7 @@
 
     .hero h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-size: clamp(3rem, 4vw, 5.5rem);
       line-height: 1.05;
       letter-spacing: -0.01em;
       margin-bottom: 1.8rem;
@@ -123,7 +145,7 @@
       gap: 0.6rem;
       text-decoration: none;
       color: var(--ink);
-      font-size: 0.9rem;
+      font-size: 1.2rem;
       font-weight: 500;
       border-bottom: 1.5px solid var(--accent);
       padding-bottom: 2px;
@@ -371,7 +393,10 @@
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-photo-wrap { order: -1; }
+      .hero-photo, .hero-photo-placeholder { width: 140px; height: 170px; }
       .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
     }
@@ -393,10 +418,29 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="hero-label">Available for opportunities</p>
-      <h1>Hi, I'm <em>Siri Anil</em> —<br>a Software Developer based in California.</h1>
-      <p class="hero-bio">I love collaborating with fellow devs to build software with a focus on performance, reliability and quality.</p>
-      <a href="#work" class="hero-cta">See my work</a>
+      <div class="hero-text">
+        <p class="hero-label">Available for opportunities</p>
+        <h1>Hi, I'm <em>Siri Anil</em> — a Senior Software Engineer based in California.</h1>
+        <p class="hero-bio">I love building products by writing code in collaboration with fun teams.</p>
+        <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.8rem;">
+          <a href="https://github.com/sirianil" class="hero-cta">Here's my work on Github</a>
+          <a href="https://www.linkedin.com/in/siri-anil-244326a1/" class="hero-cta">Here's my LinkedIn</a>
+          <a href="siri-anil-resume.pdf" class="hero-cta">Here's my Resume</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <!--
+          TO ADD YOUR PHOTO:
+          Replace the placeholder div below with:
+          <img src="photo.jpg" alt="Your Name" class="hero-photo">
+          and put your photo file in the same folder as index.html
+        -->
+        <div class="hero-photo-placeholder">
+          <img src="pic.png" class="hero-photo">
+          </svg>
+          <span>Siri Anil</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -407,19 +451,19 @@
       <h2 class="section-title reveal">A little about me.</h2>
       <div class="about-grid">
         <div class="about-text reveal">
-          <p>I building products by writing code </p>
-          <p>A second paragraph is a great place to mention where you've worked, what you've studied, or any experiences that shaped how you think and work.</p>
-          <p>Feel free to add a third paragraph with something personal — hobbies, interests, what you're currently learning or reading.</p>
+          <p>I’m a senior dev who lives for the process of building great products from the ground up. </p>
+          <p>I’m big on high-velocity output, and I’ve developed a pretty specialized workflow using AI to keep my contribution levels high without sacrificing a shred of quality.</p>
+          <p>For me, software is a team sport. I’m at my best when I’m collaborating on product strategy, diving into a meaty pair programming session, or obsessing over clean, maintainable code. I’m all about shipping fast, but I’m even more about shipping things that actually work and last.</p>
         </div>
         <div class="about-aside reveal">
           <h3>Quick facts</h3>
           <div class="tag-list">
-            <span class="tag">📍 Your City</span>
-            <span class="tag">💼 Your Role</span>
-            <span class="tag">🎓 Your Degree</span>
+            <span class="tag">📍 Fremont, California</span>
+            <span class="tag">💼 Senior Software Engineer</span>
+            <span class="tag">🎓 Masters in Computer Science</span>
             <span class="tag">🌐 Open to remote</span>
             <span class="tag">☕ Coffee drinker</span>
-            <span class="tag">📚 Lifelong learner</span>
+            <span class="tag">📚 Nap Optimizer</span>
           </div>
         </div>
       </div>
@@ -442,16 +486,16 @@
 
         <a href="#" class="project-card reveal">
           <p class="project-number">Project 02</p>
-          <h3>Project Title Two</h3>
-          <p>A short description of what this project is, what problem it solves, and what technologies or methods you used.</p>
-          <span class="project-link">View project →</span>
+          <h3>Technical Reference Docs</h3>
+          <p>Upgraded technical reference docs to use modern technology and resolved tons of tech debt reducing maintaince overhead significantly.</p>
+          <span class="https://developer.squareup.com/reference/sdks/web/payments">View project →</span>
         </a>
 
         <a href="#" class="project-card reveal">
           <p class="project-number">Project 03</p>
-          <h3>Project Title Three</h3>
-          <p>A short description of what this project is, what problem it solves, and what technologies or methods you used.</p>
-          <span class="project-link">View project →</span>
+          <h3>Bloomberg Intelligence Alerts</h3>
+          <p>Led a team of developers to design and implement a highly scalable and available subscription system for alerts on published research articles.</p>
+          <span class="https://www.bloomberg.com/professional/products/bloomberg-terminal/research/bloomberg-intelligence/#overview">View project →</span>
         </a>
 
       </div>
@@ -516,7 +560,7 @@
       <div class="contact-inner">
         <div class="contact-text reveal">
           <p>I'm always open to interesting projects, collaborations, or just a good conversation. Drop me a line — I try to reply to everything.</p>
-          <a href="mailto:siri.rao13@gmail.com" class="contact-email">you@email.com</a>
+          <a href="mailto:siri.rao13@gmail.com" class="contact-email">siri.rao13@gmail.com</a>
         </div>
         <div class="social-links reveal">
           <a href="https://github.com/sirianil" target="_blank" class="social-link">
